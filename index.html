@@ -29,29 +29,47 @@
   color: #fff;
   box-sizing: border-box;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* 카드 색상 테마 */
-.card.green { background: linear-gradient(to bottom, #A4C639, #6B8E23); }
-.card.blue { background: linear-gradient(to bottom, #007AFF, #0051D5); }
-.card.red { background: linear-gradient(to bottom, #FF6B6B, #C92A2A); }
-.card.cyan { background: linear-gradient(to bottom, #4ECDC4, #44A08D); }
-.card.purple { background: linear-gradient(to bottom, #667EEA, #764BA2); }
-.card.pink { background: linear-gradient(to bottom, #F093FB, #F5576C); }
+/* 파스텔톤 카드 색상 테마 */
+.card.green { 
+  background: linear-gradient(135deg, #c3e88d 0%, #a8d5ba 100%);
+  color: #2e5e3e;
+}
+.card.blue { 
+  background: linear-gradient(135deg, #a8dadc 0%, #b4d4f1 100%);
+  color: #1e4d6b;
+}
+.card.red { 
+  background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 100%);
+  color: #8b3a42;
+}
+.card.cyan { 
+  background: linear-gradient(135deg, #89d4cf 0%, #6dc5d1 100%);
+  color: #1e5d67;
+}
+.card.purple { 
+  background: linear-gradient(135deg, #d4a5d4 0%, #c8b6db 100%);
+  color: #5e4a78;
+}
+.card.pink { 
+  background: linear-gradient(135deg, #fff5b5 0%, #ffe08a 100%);
+  color: #8b6914;
+}
 
 .card-title {
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: bold;
   margin-bottom: 12px;
-  color: #ffffff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   letter-spacing: 0.5px;
 }
 
@@ -73,25 +91,28 @@
 
 .chip-btn {
   display: inline-block;
-  padding: 6px 18px;
+  padding: 5px 14px;
   border-radius: 999px;
   border: none;
-  color: #fff;
+  color: inherit;
   font-weight: 500;
+  font-size: 0.9em;
   text-decoration: none;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
 .chip-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   transform: scale(1.05);
 }
 
 .chip-desc {
-  font-size: 0.85em;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75em;
+  color: inherit;
+  opacity: 0.8;
   font-style: italic;
   white-space: nowrap;
   overflow: hidden;
@@ -107,14 +128,29 @@
 .search-input {
   width: 60%;
   max-width: 400px;
-  padding: 8px 12px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9em;
+  border: 2px solid #e8e8e8;
+  border-radius: 25px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #a8dadc;
+  box-shadow: 0 0 0 3px rgba(168, 218, 220, 0.1);
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 </style>
 </head>
-<body style="background: #f5f5f5;">
+<body>
 
 <!-- 검색창 -->
 <div class="search-box">
