@@ -1,17 +1,104 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
 <style>
-body {
-  font-family: "Noto Sans KR", sans-serif;
-  background: none; /* 배경 제거 */
-  margin: 0;
-  padding: 0;
+/* 카드 컨테이너 */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* 반응형 */
+@media (max-width: 1200px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  padding: 20px;
+  color: #fff;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 카드 색상 테마 */
+.card.green { background: linear-gradient(to bottom, #A4C639, #6B8E23); }
+.card.blue { background: linear-gradient(to bottom, #007AFF, #0051D5); }
+.card.red { background: linear-gradient(to bottom, #FF6B6B, #C92A2A); }
+.card.cyan { background: linear-gradient(to bottom, #4ECDC4, #44A08D); }
+.card.purple { background: linear-gradient(to bottom, #667EEA, #764BA2); }
+.card.pink { background: linear-gradient(to bottom, #F093FB, #F5576C); }
+
+.card-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.card-icon { margin-right: 8px; }
+
+.chip-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.chip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.chip-btn {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.chip-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+.chip-desc {
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 검색창 */
 .search-box {
   text-align: center;
   padding: 16px;
@@ -25,134 +112,116 @@ body {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 20px;
-}
-
-@media (max-width: 1000px) {
-  .cards-container { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 700px) {
-  .cards-container { grid-template-columns: 1fr; }
-}
-
-.card {
-  background: #fff;
-  border: 1px solid #ddd; /* 카드 테두리 추가 */
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: none; /* 그림자 제거 */
-  transition: transform 0.15s ease, border-color 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-3px);
-  border-color: #bbb; /* hover 시 테두리 강조 */
-}
-
-.card-title {
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 1.1em;
-}
-
-.chip-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.chip-btn {
-  padding: 4px 12px;
-  border-radius: 999px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
-  color: #333;
-  text-decoration: none;
-  font-size: 0.9em;
-}
-
-.chip-desc {
-  font-size: 0.8em;
-  color: #777;
-}
-
-/* 상단 색상 바 */
-.card.green { border-top: 4px solid #8BC34A; }
-.card.blue { border-top: 4px solid #2196F3; }
-.card.red { border-top: 4px solid #F44336; }
-.card.cyan { border-top: 4px solid #26C6DA; }
-.card.purple { border-top: 4px solid #7E57C2; }
-.card.pink { border-top: 4px solid #EC407A; }
-
 </style>
 </head>
-<body>
+<body style="background: #f5f5f5;">
 
+<!-- 검색창 -->
 <div class="search-box">
-  <input type="text" class="search-input" placeholder="Search.." oninput="filterCards()">
+  <input type="text" class="search-input" placeholder="검색어 입력 (제목, 버튼, 설명)" oninput="filterCards()">
 </div>
 
+<!-- 카드 컨테이너 -->
 <div class="cards-container" id="cards">
+
+  <!-- 어드민 -->
   <div class="card green">
-    <div class="card-title">🔖 어드민</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">SOOP Admin</a>
-      <span class="chip-desc">#관리</span>
-    </div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">CMS</a>
-      <span class="chip-desc">#관리</span>
+    <div class="card-title"><span class="card-icon">🔖</span> 어드민</div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="https://admin.sooplive.co.kr" class="chip-btn">[KR] SOOP Admin</a>
+        <span class="chip-desc">#[KR] 어드민, admin</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://cms.sooplive.com/login" class="chip-btn">[GL] SOOP CMS</a>
+        <span class="chip-desc">#[GL] 어드민, cms</span>
+      </div>
     </div>
   </div>
 
+  <!-- 통계 -->
   <div class="card blue">
-    <div class="card-title">📊 통계</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">SOOPerBoard</a>
-      <span class="chip-desc">#대시보드</span>
-    </div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">인사이트</a>
-      <span class="chip-desc">#로그</span>
+    <div class="card-title"><span class="card-icon">📊</span> 통계</div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="http://sooperboard.soopinfra.prv/login" class="chip-btn">SOOPerBoard</a>
+        <span class="chip-desc">#SOOPerBoard</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://esadmlog.afreecatv.com/s/developer-space/login?" class="chip-btn">인사이트</a>
+        <span class="chip-desc">#Elastic, 국내로그, 대시보드</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://log.sooplive.com/_dashboards/app/login?nextUrl=/_dashboards/app/dashboards#/list" class="chip-btn">오픈서치</a>
+        <span class="chip-desc">#글로벌 로그, 대시보드</span>
+      </div>
     </div>
   </div>
 
+  <!-- 장애 -->
   <div class="card red">
-    <div class="card-title">🚨 장애대응</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">Firebase</a>
-      <span class="chip-desc">#Crashlytics</span>
+    <div class="card-title"><span class="card-icon">🚨</span> 장애대응</div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="https://sotong.sooplive.co.kr/?board_type=report&work=list" class="chip-btn">버그 리포트</a>
+        <span class="chip-desc">#소통센터, 버그리포트</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://sotong.sooplive.co.kr/?board_type=user&work=list" class="chip-btn">유저 게시판</a>
+        <span class="chip-desc">#소통센터, 유저게시판</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://console.firebase.google.com/u/0/project/nowcom-afpush/crashlytics/app/android:kr.co.nowcom.mobile.afreeca/issues?hl=ko&state=all&time=7d&types=crash&tag=all&sort=eventCount" class="chip-btn">[KR] Firebase</a>
+        <span class="chip-desc">#Android, Google, Firebase, Crashlytics</span>
+      </div>
     </div>
   </div>
 
+  <!-- 필요한데 안보이네 -->
   <div class="card cyan">
-    <div class="card-title">🔒 기타</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">계정정보</a>
-      <span class="chip-desc">#보안</span>
+    <div class="card-title"><span class="card-icon">🔒</span> 필요한 정보 ( 보안 ) </div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="https://soop-global.atlassian.net/wiki/spaces/mdg/pages/104825646" class="chip-btn">계정정보</a>
+        <span class="chip-desc">#테스트 계정정보, 보안필수</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://" class="chip-btn">URL</a>
+        <span class="chip-desc">#summary</span>
+      </div>
     </div>
   </div>
 
+  <!-- TEMP -->
   <div class="card purple">
-    <div class="card-title">🗄️ 추가</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">URL1</a>
-      <span class="chip-desc">#summary</span>
+    <div class="card-title"><span class="card-icon">🗄️</span> TEMP</div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="https://" class="chip-btn">URL</a>
+        <span class="chip-desc">#summary</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://" class="chip-btn">URL</a>
+        <span class="chip-desc">#summary</span>
+      </div>
     </div>
   </div>
 
+  <!-- TEMP -->
   <div class="card pink">
-    <div class="card-title">🔖 TEMP</div>
-    <div class="chip-row">
-      <a href="#" class="chip-btn">URL2</a>
-      <span class="chip-desc">#summary</span>
+    <div class="card-title"><span class="card-icon">🔖</span> TEMP</div>
+    <div class="chip-container">
+      <div class="chip-row">
+        <a href="https://" class="chip-btn">URL</a>
+        <span class="chip-desc">#summary</span>
+      </div>
+      <div class="chip-row">
+        <a href="https://" class="chip-btn">URL</a>
+        <span class="chip-desc">#summary</span>
+      </div>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -162,11 +231,10 @@ function filterCards() {
 
   cards.forEach(card => {
     const title = card.querySelector('.card-title').textContent.toLowerCase();
-    const btns = [...card.querySelectorAll('.chip-btn')].map(b => b.textContent.toLowerCase()).join(' ');
+    const btnTexts = [...card.querySelectorAll('.chip-btn')].map(btn => btn.textContent.toLowerCase()).join(' ');
     const descs = [...card.querySelectorAll('.chip-desc')].map(d => d.textContent.toLowerCase()).join(' ');
 
-    // 검색: 제목 + 버튼 + 설명
-    if (title.includes(query) || btns.includes(query) || descs.includes(query)) {
+    if (title.includes(query) || btnTexts.includes(query) || descs.includes(query)) {
       card.style.display = 'block';
     } else {
       card.style.display = 'none';
