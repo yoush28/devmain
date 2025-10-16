@@ -94,7 +94,7 @@ body {
 <body>
 
 <div class="search-box">
-  <input type="text" class="search-input" placeholder="검색어 입력 (제목 또는 설명)" oninput="filterCards()">
+  <input type="text" class="search-input" placeholder="검색어 입력 (제목 / 버튼 / 설명)" oninput="filterCards()">
 </div>
 
 <div class="cards-container" id="cards">
@@ -162,8 +162,11 @@ function filterCards() {
 
   cards.forEach(card => {
     const title = card.querySelector('.card-title').textContent.toLowerCase();
+    const btns = [...card.querySelectorAll('.chip-btn')].map(b => b.textContent.toLowerCase()).join(' ');
     const descs = [...card.querySelectorAll('.chip-desc')].map(d => d.textContent.toLowerCase()).join(' ');
-    if (title.includes(query) || descs.includes(query)) {
+
+    // 검색: 제목 + 버튼 + 설명
+    if (title.includes(query) || btns.includes(query) || descs.includes(query)) {
       card.style.display = 'block';
     } else {
       card.style.display = 'none';
