@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOOP Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 검색창 -->
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search..." oninput="filterCards()">
+    </div>
+
+    <!-- 카드 컨테이너 -->
+    <div class="cards-container" id="cards">
+        <!-- 카드들이 JavaScript로 동적 생성됨 -->
+    </div>
+
+    <!-- 데이터와 스크립트 로드 -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
