@@ -62,11 +62,6 @@ const cardsData = [
                 desc: "#테스트 계정정보, 보안필수"
             },
             {
-                text: "계정정보",
-                url: "https://soop-global.atlassian.net/wiki/spaces/mdg/pages/104825646",
-                desc: "#테스트 계정정보, 보안필수"
-            },
-            {
                 text: "디바이스 보유현황",
                 url: "https://soop-global.atlassian.net/wiki/spaces/mdg/pages/284525206",
                 desc: "#디바이스 보유현황, device, 장비"
