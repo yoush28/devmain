@@ -65,6 +65,11 @@ const cardsData = [
                 text: "디바이스 보유현황",
                 url: "https://soop-global.atlassian.net/wiki/spaces/mdg/pages/284525206",
                 desc: "#디바이스 보유현황, device, 장비"
+            },
+            {
+                text: "공용 개발 호스트",
+                url: "https://soop-global.atlassian.net/wiki/spaces/SKD/pages/89292937/SOOP+KR+Development",
+                desc: "#개발호스트, host , dev"
             }
         ]
     },
