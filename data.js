@@ -70,6 +70,11 @@ const cardsData = [
                 text: "공용 개발 호스트",
                 url: "https://soop-global.atlassian.net/wiki/spaces/SKD/pages/89292937/SOOP+KR+Development",
                 desc: "#개발호스트, host , dev"
+            },
+            {
+                text: "강제 업데이트 버전",
+                url: "https://admin.m.sooplive.co.kr/menu/a/index",
+                desc: "#강제업데이트, 강업"
             }
         ]
     },
